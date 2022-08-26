@@ -1,23 +1,36 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using RunningActivityTracker.Entities;
+using RunningActivityTracker.Repositories;
 
 namespace RunningActivityTracker.Services
 {
     public class TeamService : ITeamService
     {
-        public void CreateTeam(string teamName)
+        private ITeamRepository _repository;
+
+        private IUserRepository _userRepository;
+
+        public TeamService(ITeamRepository repository, IUserRepository userRepository)
         {
-            throw new System.NotImplementedException();
+            _repository = repository;
+            _userRepository = userRepository;
+        }
+        public void CreateTeam(TeamEntity team)
+        {
+            _repository.CreateTeam(team);
         }
 
         public void AddMember(string memberName)
         {
-            throw new System.NotImplementedException();
+            UserEntity user = _userRepository.FindUserByName(memberName);
+            TeamEntity team = _repository.GetAll().FirstOrDefault(team => team.Admin != null);
+            _repository.AddTeamMember(team, user);
         }
 
         public IEnumerable<TeamEntity> GetAll()
         {
-            throw new System.NotImplementedException();
+            return _repository.GetAll();
         }
     }
 }

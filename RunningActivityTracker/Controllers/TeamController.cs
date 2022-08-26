@@ -19,9 +19,9 @@ namespace RunningActivityTracker.Controllers
 
         [HttpPost("/team")]
         // add auhtorization here
-        public ActionResult CreateTeam([FromBody] string teamName)
+        public ActionResult CreateTeam([FromBody] TeamEntity team)
         {
-            _teamService.CreateTeam(teamName);
+            _teamService.CreateTeam(team);
             return Ok();
         }
 

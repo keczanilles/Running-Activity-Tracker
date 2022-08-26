@@ -1,19 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using RunningActivityTracker.Entities;
+using RunningActivityTracker.Repositories;
 
 namespace RunningActivityTracker.Services
 {
     public class UserService :  IUserService
     {
-        public UserEntity FindCurrentUser()
+        private IUserRepository _repository;
+
+        public UserService(IUserRepository repository)
         {
-            throw new System.NotImplementedException();
+            _repository = repository;
+        }
+        public UserEntity FindCurrentUser(string userName)
+        {
+            return _repository.FindUserByName(userName);
         }
 
         public void CreateUser(UserEntity user)
         {
-            throw new System.NotImplementedException();
+            _repository.CreateUser(user);
         }
 
         public Task<UserEntity> AuthenticateAsync(string userName, string password)
@@ -23,7 +30,7 @@ namespace RunningActivityTracker.Services
 
         public IEnumerable<UserEntity> GetAll()
         {
-            throw new System.NotImplementedException();
+            return _repository.GetAll();
         }
     }
 }
