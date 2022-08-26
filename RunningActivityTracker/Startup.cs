@@ -27,6 +27,11 @@ namespace RunningActivityTracker
         {
             services.AddControllers();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ITeamService, TeamService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddSingleton<Database>();
             // add your services and repositories registrations here
             services.AddSwaggerGen(c =>
             {
