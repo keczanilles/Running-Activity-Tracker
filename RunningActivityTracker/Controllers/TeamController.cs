@@ -17,16 +17,16 @@ namespace RunningActivityTracker.Controllers
             _teamService = teamService;
         }
 
+        [Authorize(Roles = "User")]
         [HttpPost("/team")]
-        // add auhtorization here
         public ActionResult CreateTeam([FromBody] TeamEntity team)
         {
             _teamService.CreateTeam(team);
             return Ok();
         }
 
+        [Authorize(Roles = "TeamAdmin")]
         [HttpPut("/team/members")]
-        // add authorization here
         public ActionResult AddMember([FromBody] string memberName)
         {
             _teamService.AddMember(memberName);

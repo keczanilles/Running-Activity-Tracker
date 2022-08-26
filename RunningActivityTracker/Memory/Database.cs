@@ -14,6 +14,21 @@ namespace RunningActivityTracker.Services
         {
             _teamEntity = new();
             _userEntity = new();
+            _teamEntity.Add(new TeamEntity("Cowboys",new List<UserEntity>(), new UserEntity()));
+            _userEntity.Add(new UserEntity()
+            {
+                Email = "prescott@cowboys.hu",
+                Password = "ohyeah",
+                Roles = new[] {"TeamAdmin"},
+                Username = "chocolateVanillaLightning"
+            });
+            _userEntity.Add(new UserEntity()
+            {
+                Email = "elliott@cowboys.hu",
+                Password = "ohno",
+                Roles = new[] { "User" },
+                Username = "feedZeke"
+            });
         }
 
         public UserEntity FindUserByName(string username)
